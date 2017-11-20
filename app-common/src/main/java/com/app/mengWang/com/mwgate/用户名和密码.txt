@@ -1,0 +1,2 @@
+sms.mont.username=J02602
+sms.mont.password=251005
