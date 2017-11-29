@@ -34,6 +34,8 @@ public class PageParameter extends HashMap<String, Object> implements Serializab
 
     private List<Property> properties;
 
+    private int start;
+
 
     public List<Property> getProperties() {
         return properties;
@@ -57,6 +59,14 @@ public class PageParameter extends HashMap<String, Object> implements Serializab
             super.put("sort", sortBy);
         }
 
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
     }
 
     public String getSort() {

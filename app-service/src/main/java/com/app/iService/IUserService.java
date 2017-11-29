@@ -13,7 +13,7 @@ import java.util.List;
  * @author zhujiamin
  * @date 2017/7/26
  */
-public interface IUser {
+public interface IUserService {
 
     public List<User> getAllUsers();
 
@@ -22,6 +22,15 @@ public interface IUser {
      * @param pageParameter
      */
     public List<User> getAllUsersPageList(PageParameter pageParameter);
+
+
+    List<User> getUser(PageParameter pageParameter);
+
+    int updateUser(User user);
+
+    int deleteUser(User user);
+
+    int insertUser(User user);
 
 
 }

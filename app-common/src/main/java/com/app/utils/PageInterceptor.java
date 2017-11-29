@@ -4,12 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 
 import com.app.emum.JavaClassEnum;
@@ -195,8 +190,8 @@ public class PageInterceptor implements Interceptor {
 
     	sb.append("SELECT tb.* FROM (").append(sql).append(") tb WHERE");
         sql=setCondition(sb,properties);
-
-
+        sql+=" limit "+page.getStart()+" ,"+page.getPageSize();
+        System.out.println("查询-------------------------："+sql);
         return sql;
     	
     }
@@ -239,39 +234,39 @@ public class PageInterceptor implements Interceptor {
      * @year 2017
      * @remark 
      */
-//    private String jointCondition(List<Property> properties) {
-//    	if(properties==null){
-//    		return "";
-//    	}
-//    	//过滤筛选条件，value和cType为0的被过滤
-//    	List<Property> filterproperty=new ArrayList<Property>();
-//    	for (int i = 0; i <properties.size(); i++) {
-//    		String compareSql=getCompareSql(properties.get(i).getCompareType());
-//    		if(!StringUtils.isEmpty(compareSql)&&!StringUtils.isEmpty(properties.get(i).getValue().toString())){
-//    			filterproperty.add(properties.get(i));
-//    		}
-//		}
-//    	StringBuffer sb=new StringBuffer();
-//    	int count=0;
-//    	for(Property property:filterproperty){
-//    		String compareSql=getCompareSql(property.getCompareType());
-//    		sb.append(property.getFieldName()).append(" ")
-//			.append(compareSql);
-//			if (property.getFieldType().equals("Date")) {
-//				sb.append("to_date('")
-//						.append(property.getValue()).append("','yyyy-MM-dd'").append(count==filterproperty.size()-1?")":") and ");
-//    		}else if(property.getFieldType().equals("String")){
-//    			if(compareSql.equals("like")){
-//        			sb.append("('%").append(property.getValue()).append(count==filterproperty.size()-1?"%')":"' and ");
-//
-//    			}else{
-//    			sb.append("'").append(property.getValue()).append(count==filterproperty.size()-1?"'":"' and ");
-//    			}
-//    		}
-//			count++;
-//    	}
-//		return sb.toString();
-//	}
+    private String jointCondition(List<Property> properties) {
+    	if(properties==null){
+    		return "";
+    	}
+    	//过滤筛选条件，value和cType为0的被过滤
+    	List<Property> filterproperty=new ArrayList<>();
+    	for (int i = 0; i <properties.size(); i++) {
+    		String compareSql=getCompareSql(properties.get(i).getCompareType());
+    		if(!StringUtils.isEmpty(compareSql)&&!StringUtils.isEmpty(properties.get(i).getValue().toString())){
+    			filterproperty.add(properties.get(i));
+    		}
+		}
+    	StringBuffer sb=new StringBuffer();
+    	int count=0;
+    	for(Property property:filterproperty){
+    		String compareSql=getCompareSql(property.getCompareType());
+    		sb.append(property.getFieldName()).append(" ")
+			.append(compareSql);
+			if (property.getFieldType().equals("Date")) {
+				sb.append("to_date('")
+						.append(property.getValue()).append("','yyyy-MM-dd'").append(count==filterproperty.size()-1?")":") and ");
+    		}else if(property.getFieldType().equals("String")){
+    			if(compareSql.equals("like")){
+        			sb.append("('%").append(property.getValue()).append(count==filterproperty.size()-1?"%')":"' and ");
+
+    			}else{
+    			sb.append("'").append(property.getValue()).append(count==filterproperty.size()-1?"'":"' and ");
+    			}
+    		}
+			count++;
+    	}
+		return sb.toString();
+	}
 
 	private String getCompareSql(String compareType) {
 		String compareSql = "";
@@ -384,7 +379,7 @@ public class PageInterceptor implements Interceptor {
         }
         if (parameter instanceof PageParameter) {
             page = (PageParameter) parameter;
-            System.out.println(page.getPageSize());
+            System.out.println("总记录数："+page.getPageSize());
         } else if (parameter instanceof Map) {
             Map map = (Map) parameter;
             for (Object arg : map.values()) {
@@ -401,6 +396,6 @@ public class PageInterceptor implements Interceptor {
     }
  
     public void setProperties(Properties properties) {
-    	
+
     }
 }

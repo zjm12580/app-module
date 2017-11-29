@@ -3,90 +3,104 @@ package com.app.entity;
 import java.util.Date;
 
 /**
- * com.app.entity
- *
- * @author zhujiamin
- * @date 2017/7/26
- */
-public class User {
+    * User 实体类
+    * Tue Nov 21 19:29:41 CST 2017 zjm
+    */ 
 
-    private String id;
 
-    private String userName;
+public class User{
+	private long id;
+	private String userName;
+	private String password;
+	/**
+	*性别 1 男性  0 女性
+	*/	
+	private byte sex;
+	private String phone;
+	private String departent;
+	private long ruleId;
+	private String realName;
+	private Date ctime;
+	private Date mtime;
 
-    private String pwd;
+	public void setId(long id){
+	this.id=id;
+	}
 
-    private String realName;
+	public long getId(){
+		return id;
+	}
 
-    private String phone;
+	public void setUserName(String userName){
+	this.userName=userName;
+	}
 
-    private String email;
+	public String getUserName(){
+		return userName;
+	}
 
-    private String sex;
+	public void setPassword(String password){
+	this.password=password;
+	}
 
-    private Date createDate;
+	public String getPassword(){
+		return password;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setSex(byte sex){
+	this.sex=sex;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public byte getSex(){
+		return sex;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public void setPhone(String phone){
+	this.phone=phone;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public String getPhone(){
+		return phone;
+	}
 
-    public String getPwd() {
-        return pwd;
-    }
+	public void setDepartent(String departent){
+	this.departent=departent;
+	}
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
+	public String getDepartent(){
+		return departent;
+	}
 
-    public String getRealName() {
-        return realName;
-    }
+	public void setRuleId(long ruleId){
+	this.ruleId=ruleId;
+	}
 
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
+	public long getRuleId(){
+		return ruleId;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setRealName(String realName){
+	this.realName=realName;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getRealName(){
+		return realName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setCtime(Date ctime){
+	this.ctime=ctime;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Date getCtime(){
+		return ctime;
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public void setMtime(Date mtime){
+	this.mtime=mtime;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public Date getMtime(){
+		return mtime;
+	}
 }
+

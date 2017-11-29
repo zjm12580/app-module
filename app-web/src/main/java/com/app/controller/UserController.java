@@ -1,9 +1,7 @@
 package com.app.controller;
 
 import com.app.entity.User;
-import com.app.iService.IUser;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.app.iService.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +21,7 @@ import java.util.List;
 public class UserController extends BaseController{
 
     @Resource
-    private IUser iUser;
+    private IUserService iUser;
 
 
     @RequestMapping("getUsers")

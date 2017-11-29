@@ -3,7 +3,7 @@ package com.app.service.entity.test;
 
 import com.app.entity.PageParameter;
 import com.app.entity.Property;
-import com.app.iService.IUser;
+import com.app.iService.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,12 +19,12 @@ import java.util.List;
  * @author zhujiamin
  * @date 2017/7/20
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath*:ApplicationContext.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:ApplicationContext.xml"})
 public class MainTest {
 
     @Resource
-    private IUser iUser;
+    private IUserService iUser;
 
 
     @Test
@@ -39,9 +39,11 @@ public class MainTest {
         properties.add(property);
         pageParameter.setProperties(properties);
         pageParameter.setPageSize(10);
-        pageParameter.setPageNumber(1);
+        pageParameter.setPageNumber(0);
+        pageParameter.setStart(0);
         System.out.println(pageParameter.getPageSize());
-        iUser.getAllUsersPageList(pageParameter);
+        System.out.printf(iUser.getUser(pageParameter).toString());
+        System.out.printf(pageParameter.getCount()+"");
 
     }
 
