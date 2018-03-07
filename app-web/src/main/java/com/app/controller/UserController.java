@@ -17,18 +17,32 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/user")
 public class UserController extends BaseController{
 
     @Resource
     private IUserService iUser;
 
-
-    @RequestMapping("getUsers")
+    /**
+     * 获取用户
+     * @return
+     */
+    @RequestMapping("/user/getUsers")
     @ResponseBody
     public List<User> getAllUsers(){
 //        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("")
         return iUser.getAllUsers();
+
+    }
+
+//    employeemIndex
+
+    /**
+     * 员工管理
+     * @return
+     */
+    @RequestMapping("/user/employeeIndex")
+    public String employeemIndex(){
+        return "/employeeIndex";
 
     }
 }

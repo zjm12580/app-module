@@ -2,6 +2,7 @@ package com.app.entity;
 
 import com.app.utils.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,6 +36,11 @@ public class PageParameter extends HashMap<String, Object> implements Serializab
     private List<Property> properties;
 
     private int start;
+
+    public PageParameter(HttpServletRequest request) {
+        String param = request.getParameter("param");
+        System.out.println(param);
+    }
 
 
     public List<Property> getProperties() {

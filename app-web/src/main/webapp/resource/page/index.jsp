@@ -9,22 +9,6 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="Bookmark" href="/favicon.ico" >
 <link rel="Shortcut Icon" href="/favicon.ico" />
-<!--[if lt IE 9]>
-    <!--<script type="text/javascript"-->
-            <!--src="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/lib/html5shiv.js"></script>-->
-    <!--<script type="text/javascript"-->
-            <!--src="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/lib/respond.min.js"></script>-->
-    <![endif]-->
-<%--<link rel="stylesheet" type="text/css" href="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/static/h-ui/css/H-ui.min.css" />--%>
-<%--<link rel="stylesheet" type="text/css" href="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/static/h-ui.admin/css/H-ui.admin.css" />--%>
-<%--<link rel="stylesheet" type="text/css" href="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/lib/Hui-iconfont/1.0.8/iconfont.css" />--%>
-<%--<link rel="stylesheet" type="text/css" href="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/static/h-ui.admin/skin/default/skin.css" id="skin" />--%>
-<%--<link rel="stylesheet" type="text/css" href="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/static/h-ui.admin/css/style.css" />--%>
-<!--[if IE 6]>
-    <!--<script type="text/javascript"-->
-            <!--src="../../../../../../../../../H-ui.admin_v3.1.3.1/H-ui.admin/lib/DD_belatedPNG_0.0.8a-min.js"></script>-->
-    <!--<script>DD_belatedPNG.fix('*');</script>-->
-    <![endif]-->
 <title>H-ui.admin v3.1</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
@@ -80,7 +64,7 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 单车管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="单车信息" href="javascript:void(0)">单车信息</a></li>
+					<li><a data-href="bikeManage" data-title="单车信息" href="javascript:void(0)">单车信息</a></li>
 					<li><a data-href="article-list.html" data-title="单车损耗" href="javascript:void(0)">单车损耗</a></li>
 			</ul>
 		</dd>
@@ -89,9 +73,9 @@
 			<dt><i class="Hui-iconfont">&#xe613;</i> 管理员信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="picture-list.html" data-title="员工管理" href="javascript:void(0)">员工管理</a></li>
-					<li><a data-href="picture-list.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
-					<li><a data-href="picture-list.html" data-title="账号管理" href="javascript:void(0)">账号管理</a></li>
+					<li><a data-href="<%=path %>/user/employeeIndex" data-title="员工管理" href="javascript:void(0)">员工管理</a></li>
+					<li><a data-href="role/roleIndex" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+					<li><a data-href="user/accountManagerIndex" data-title="账号管理" href="javascript:void(0)">账号管理</a></li>
 
 				</ul>
 		</dd>

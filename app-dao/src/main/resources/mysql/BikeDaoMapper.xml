@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.BikeMapper">
+    <resultMap id="baseResultMap" type="com.app.entity.Bike">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="BIGINT"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="pictureUrl" column="pictureUrl" jdbcType="VARCHAR"/>
+        <result property="ctime" column="ctime" jdbcType="TIMESTAMP"/>
+        <result property="mtime" column="mtime" jdbcType="TIMESTAMP"/>
+        <result property="modifer" column="modifer" jdbcType="BIGINT"/>
+        <result property="isdel" column="isdel" jdbcType="TINYINT"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+        <result property="rent" column="rent" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="baseSql">
+		id,name,type,remark,pictureUrl,ctime,mtime,modifer,isdel,price,rent
+	</sql>
+
+    <insert id="add" parameterType="com.app.entity.Bike">
+		INSERT INTO bike
+		(id,name,type,remark,pictureUrl,ctime,mtime,modifer,isdel,price,rent)
+		values (
+		#{id},#{name},#{type},#{remark},#{pictureUrl},#{ctime},#{mtime},#{modifer},#{isdel},#{price},#{rent})
+	</insert>
+
+    <select id="getBike" parameterType="com.app.entity.Bike" resultMap="baseResultMap">
+        SELECT
+        id,name,type,remark,pictureUrl,ctime,mtime,modifer,isdel,price,rent
+        FROM
+        bike
+        where isdel =0
+        <if test="name !=null and name!=''">
+            and name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="price !=null">
+            and price =#{price}
+        </if>
+        <if test="rent !=null">
+            and rent =#{rent}
+        </if>
+        <if test="id !=null">
+            and id =#{rent}
+        </if>
+        <if test="type !=null">
+            and type =#{type}
+        </if>
+    </select>
+
+    <select id="count" parameterType="com.app.entity.Bike" resultType="java.lang.Integer">
+
+        SELECT
+        COUNT(1)
+        FROM
+        bike
+        where isdel =0
+        <if test="name !=null and name!=''">
+            and name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="price !=null">
+            and price =#{price}
+        </if>
+        <if test="rent !=null">
+            and rent =#{rent}
+        </if>
+        <if test="id !=null">
+            and id =#{rent}
+        </if>
+        <if test="type !=null">
+            and type =#{type}
+        </if>
+    </select>
+
+    <delete id="deleteBike" parameterType="com.app.entity.Bike">
+		delete from bike where id=#{id}
+	</delete>
+
+    <update id="updateBike" parameterType="com.app.entity.Bike">
+        UPDATE bike set
+        <set>
+
+            <if test="name !=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="price !=null">
+                price =#{price},
+            </if>
+            <if test="rent !=null">
+                rent =#{rent},
+            </if>
+            <if test="type !=null">
+                type =#{type},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

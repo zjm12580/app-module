@@ -8,7 +8,7 @@ package com.app.emum;
  * @date 2017/7/31
  */
 public enum JavaClassEnum {
-    INTEGER("Integer"),STRING("String"),DATE("Date"),INT("int");
+    INTEGER("Integer"), STRING("String"), DATE("Date"), INT("int");
     private String desc;
 
     JavaClassEnum(String desc) {
