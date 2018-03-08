@@ -99,6 +99,7 @@ var column=[
             "serverSide": true,
             "ajax": {
                 "url": "<%=path %>/app/getBikes",
+                "type":"post",
                 "data": function (data) {
                     data.pageIndex = (data.start / data.length) + 1;
                     data.pageSize=50;
@@ -157,7 +158,7 @@ var column=[
                     "targets": [4],
                     "data": "pictureUrl",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
+                        return "<img width='100' class='picture-thumb' src='"+data+"'>";
                     }
                 },
                 {
@@ -185,14 +186,14 @@ var column=[
                     "targets": [8],
                     "data": "ctime",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
+                        return formatDateTime(data);
                     }
                 },
                 {
                     "targets": [9],
                     "data": "mtime",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
+                        return formatDateTime(data);
                     }
                 }
         ]
@@ -271,7 +272,21 @@ var column=[
             });
         });
     }
-
+    function formatDateTime(inputTime) {
+        var date = new Date(inputTime);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    };
 </script>
 </body>
 </html>

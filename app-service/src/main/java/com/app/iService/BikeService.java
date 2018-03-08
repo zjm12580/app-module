@@ -13,9 +13,9 @@ public interface BikeService {
 
     Integer count(Bike param);
 
-    Object add(Bike param);
+    int add(Bike param);
 
-    Object deleteBike(Bike param);
+    int deleteBike(Bike param);
 
-    Object updateBike(Bike param);
+    int updateBike(Bike param);
 }

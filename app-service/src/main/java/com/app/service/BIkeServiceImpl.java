@@ -32,17 +32,17 @@ public class BIkeServiceImpl implements BikeService{
     }
 
     @Override
-    public Object add(Bike param) {
+    public int add(Bike param) {
         return bikeDaoImpl.add(param);
     }
 
     @Override
-    public Object deleteBike(Bike param) {
+    public int deleteBike(Bike param) {
         return bikeDaoImpl.deleteBike(param);
     }
 
     @Override
-    public Object updateBike(Bike param) {
+    public int updateBike(Bike param) {
         return bikeDaoImpl.updateBike(param);
     }
 }

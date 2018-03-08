@@ -1,5 +1,7 @@
 package com.app.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -8,8 +10,10 @@ import java.util.Date;
 public class BaseObject {
 
     private Long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date mtime;
     private  Integer modifer;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ctime;
 
     public Long getId() {

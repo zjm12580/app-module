@@ -8,13 +8,14 @@ import com.alibaba.druid.support.json.JSONUtils;
 import com.app.entity.Bike;
 import com.app.entity.PageDataTable;
 import com.app.iService.BikeService;
+import com.app.utils.FileUtils;
+import com.app.utils.ResultMap;
+import com.sun.org.apache.regexp.internal.RE;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -51,8 +52,21 @@ public class BikeController extends BaseController {
 
     @RequestMapping("/app/add")
     @ResponseBody
-    public Object add(Bike param) {
-       return  bikeService.add(param);
+    public Object add(Bike param, @RequestParam("file") MultipartFile file) {
+        try {
+            if (param==null){
+                throw new Exception("param为空");
+            }
+            if (file == null || file.getSize() == 0) {
+                throw new Exception("上传文件为空");
+            }
+            param.setPictureUrl(FileUtils.savePic(file.getInputStream(), file.getOriginalFilename()));
+            param.setIsdel(0);
+            bikeService.add(param);
+        }catch (Exception e){
+          return   ResultMap.failed(e.getMessage());
+        }
+       return ResultMap.success("新增成功");
     }
 
     @RequestMapping("/app/delete")
@@ -61,7 +75,7 @@ public class BikeController extends BaseController {
         return bikeService.deleteBike(param);
     }
 
-    @RequestMapping("/app/delete")
+    @RequestMapping("/app/updateBike")
     @ResponseBody
     public Object updateBike(Bike param){
         return bikeService.updateBike(param);

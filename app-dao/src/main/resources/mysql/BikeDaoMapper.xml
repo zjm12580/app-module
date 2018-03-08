@@ -46,6 +46,12 @@
         <if test="type !=null">
             and type =#{type}
         </if>
+        <if test="datemin !=null">
+            and ctime >#{datemin}
+        </if>
+        <if test="datemax !=null">
+            and   datemax  <![CDATA[<]]> #{datemax}
+        </if>
     </select>
 
     <select id="count" parameterType="com.app.entity.Bike" resultType="java.lang.Integer">
@@ -69,6 +75,12 @@
         </if>
         <if test="type !=null">
             and type =#{type}
+        </if>
+        <if test="datemin !=null">
+            and ctime >#{datemin}
+        </if>
+        <if test="datemax !=null">
+        and   datemax  <![CDATA[<]]> #{datemax}
         </if>
     </select>
 

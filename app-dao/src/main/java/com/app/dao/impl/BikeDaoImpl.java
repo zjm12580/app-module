@@ -3,7 +3,6 @@ package com.app.dao.impl;
 import com.app.dao.IBikeDao;
 import com.app.entity.Bike;
 import com.app.mapper.BikeMapper;
-import com.app.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +27,17 @@ public class BikeDaoImpl implements IBikeDao{
     }
 
     @Override
-    public Object add(Bike param) {
+    public int add(Bike param) {
         return bikeMapper.add(param);
     }
 
     @Override
-    public Object deleteBike(Bike param) {
+    public int deleteBike(Bike param) {
         return bikeMapper.deleteBike(param);
     }
 
     @Override
-    public Object updateBike(Bike param) {
+    public int updateBike(Bike param) {
         return bikeMapper.updateBike(param);
     }
 }
