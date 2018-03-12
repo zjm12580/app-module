@@ -45,4 +45,9 @@ public class BIkeServiceImpl implements BikeService{
     public int updateBike(Bike param) {
         return bikeDaoImpl.updateBike(param);
     }
+
+    @Override
+    public int batchDelete(List<Integer> idList) {
+        return bikeDaoImpl.batchDelete(idList);
+    }
 }

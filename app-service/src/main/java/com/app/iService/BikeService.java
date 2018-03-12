@@ -18,4 +18,6 @@ public interface BikeService {
     int deleteBike(Bike param);
 
     int updateBike(Bike param);
+
+    int batchDelete(List<Integer> param);
 }

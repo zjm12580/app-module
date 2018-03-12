@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class ResultMap<T> {
 
-    private static final String SUCCESS="success";
+    private static final Boolean SUCCESS=Boolean.TRUE;
 
-    private static final String FAILED="failed";
+    private static final Boolean FAILED=Boolean.FALSE;
 
     private T data;
 

@@ -40,4 +40,9 @@ public class BikeDaoImpl implements IBikeDao{
     public int updateBike(Bike param) {
         return bikeMapper.updateBike(param);
     }
+
+    @Override
+    public int batchDelete(List<Integer> idList) {
+        return bikeMapper.batchDelete(idList);
+    }
 }

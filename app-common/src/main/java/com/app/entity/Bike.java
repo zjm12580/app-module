@@ -31,6 +31,26 @@ public class Bike  extends BaseObject{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private  Date datemax;
 
+    private Integer start;
+
+    private Integer length;
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
     public Date getDatemin() {
         return datemin;
     }

@@ -19,13 +19,13 @@
         -
         <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
         <input type="text" class="input-text" style="width:250px" placeholder="输入单车名称" id="bikeName" name="name">
-        <button type="submit" onclick="reload()" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索单车</button>
+        <button  onclick="reloadData()" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索单车</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
-        <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+        <a href="javascript:;" onclick="batchDelele()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
             批量删除</a>
         <a href="javascript:;" onclick="member_add('添加单车','addBike','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 新增单车</a>
-    </span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+    </span> <%--<span class="r">共有数据：<strong>88</strong> 条</span>--%> </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
@@ -38,23 +38,12 @@
                 <th width="90">备注</th>
                 <th width="150">单价</th>
                 <th width="">租金</th>
-                <th width="130">创建时间</th>
+                <th width="70">创建时间</th>
                 <th width="70">修改时间</th>
+                <th width="40">操作</th>
             </tr>
             </thead>
             <tbody>
-            <%--<tr class="text-c">--%>
-                <%--<td><input type="checkbox" value="1" name=""></td>--%>
-                <%--<td>1</td>--%>
-                <%--<td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','member-show.html','10001','360','400')">张三</u></td>--%>
-                <%--<td>男</td>--%>
-                <%--<td>13000000000</td>--%>
-                <%--<td>admin@mail.com</td>--%>
-                <%--<td class="text-l">北京市 海淀区</td>--%>
-                <%--<td>2014-6-11 11:11:42</td>--%>
-                <%--<td class="td-status"><span class="label label-success radius">已启用</span></td>--%>
-                <%--<td class="td-manage"><a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>--%>
-            <%--</tr>--%>
             </tbody>
         </table>
     </div>
@@ -62,21 +51,6 @@
 <script type="text/javascript">
 
     var table;
-    function reload() {
-        $('.table-sort').DataTable().ajax.reload();
-    }
-//    var column=[
-//        {"data": "id", name:"id"},
-//        {"data": "name", name:"name" },
-//        {"data": "type", name:"type"},
-//        {"data": "pictureUrl", name:"pictureUrl" },
-//        {"data": "remark", name:"remark"},
-//        {"data": "price", name:"price" },
-//        {"data": "rent", name:"rent" },
-//        {"data": "ctime", name:"ctime" },
-//        {"data": "mtime", name:"mtime"  }
-//    ];
-
 var column=[
     {"data": "id"},
     {"data": "name"},
@@ -97,40 +71,23 @@ var column=[
             <%--"sAjaxSource": '<%=path %>/app/getBikes',--%>
 //            "columns": column,
             "serverSide": true,
+            "ordering": false, // 禁止排序
             "ajax": {
                 "url": "<%=path %>/app/getBikes",
-                "type":"post",
+                "type": "post",
                 "data": function (data) {
-                    data.pageIndex = (data.start / data.length) + 1;
-                    data.pageSize=50;
                     data.name = $("#bikeName").val();
-                    data.datemax= $("#datemax").val();
-                    data.datemin= $("#datemin").val();
+                    data.datemax = $("#datemax").val();
+                    data.datemin = $("#datemin").val();
 
                 }
             },
-//            "fnServerParams": function (aoData) {
-//                aoData.push({
-//                        name: "name",
-//                        value: $("#bikeName").val()
-//                    },
-//                    {
-//                        name: "datemax",
-//                        value: $("#datemax").val()
-//                    },
-//                    {
-//                        name: "date",
-//                        value: $("#datemin").val()
-//                    }
-//                )
-//
-//            },
             "columnDefs": [
                 {
                     "targets": [0],
                     "data": "id",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<input type=\"checkbox\" name=\"\" value=\"\">";
+                        return "<input type=\"checkbox\" value='"+data+"' name=\"\" value=\"\">";
                     }
                 },
                 {
@@ -158,7 +115,7 @@ var column=[
                     "targets": [4],
                     "data": "pictureUrl",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<img width='100' class='picture-thumb' src='"+data+"'>";
+                        return "<img width='100' class='picture-thumb' src='"+"<%=path %>/app/downloadPhoto?fileId="+data+"'>";
                     }
                 },
                 {
@@ -195,11 +152,27 @@ var column=[
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
                         return formatDateTime(data);
                     }
+                },
+                {
+                    "targets": [10],
+                    "data": "id",
+                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                        return "<a style='text-decoration:none' onclick=\"member_modify('编辑单车','updateBikeIndex','','510','500',"+data+")\" href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6df;</i></a>" +
+                            "<a style='text-decoration:none' class='ml-5' onclick=\"delBike('"+data+"')\"  href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6e2;</i></a>";
+                    }
                 }
+//                <a style="text-decoration:none" onclick="product_brand_edit('品牌编辑','codeing.html','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
         ]
         });
 
     });
+
+    function reloadData() {
+//        table.fnClearTable();
+//        table.fn
+        var table = $('.table-sort').DataTable();
+        table.ajax.reload();
+    }
     /*用户-添加*/
     function member_add(title,url,w,h){
         layer_show(title,url,w,h);
@@ -207,6 +180,18 @@ var column=[
     /*用户-查看*/
     function member_show(title,url,id,w,h){
         layer_show(title,url,w,h);
+    }
+
+    function member_modify(title, url, str, w, h, id) {
+        layer.open({
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            fix: false, //不固定
+            maxmin: true,
+            shade: 0.4,
+            title: title,
+            content: url + "?id=" + id
+        });
     }
     /*用户-停用*/
     function member_stop(obj,id){
@@ -255,16 +240,21 @@ var column=[
     function change_password(title,url,id,w,h){
         layer_show(title,url,w,h);
     }
+
     /*用户-删除*/
-    function member_del(obj,id){
+    function delBike(id){
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
                 type: 'POST',
-                url: '',
+                url: '<%=path %>/app/delete?id=' + id,
                 dataType: 'json',
                 success: function(data){
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
+                    if(data.status) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        reloadData();
+                    }else {
+                        layer.msg('删除失败!', {icon: 1, time: 1000});
+                    }
                 },
                 error:function(data) {
                     console.log(data.msg);
@@ -287,6 +277,44 @@ var column=[
         second = second < 10 ? ('0' + second) : second;
         return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
     };
+
+
+    function batchDelele() {
+        layer.confirm('确认要删除吗？',function(index){
+            var td='';
+            var leng = $(".table-sort tr").length;
+            var filter_numbs = new Array();
+            for (var i = 1; i <= leng; i++) {
+                td = $(".table-sort tr").eq(i).find("td:first").find("input[type='checkbox']");
+                var isChecked = td.is(':checked');
+                if (isChecked) {
+                    filter_numbs.push(td.val());
+                }
+            }
+            var ids=JSON.stringify(filter_numbs);
+            console.log(ids);
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                url: '<%=path %>/app/batchDelete',
+                dataType: 'json',
+                data:ids,
+                success: function(data){
+                    if(data.status) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        reloadData();
+                    }else {
+                        layer.msg(data.msg, {icon: 2, time: 1000});
+                    }
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+
 </script>
 </body>
 </html>

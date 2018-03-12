@@ -41,7 +41,7 @@
             and rent =#{rent}
         </if>
         <if test="id !=null">
-            and id =#{rent}
+            and id =#{id}
         </if>
         <if test="type !=null">
             and type =#{type}
@@ -51,6 +51,10 @@
         </if>
         <if test="datemax !=null">
             and   datemax  <![CDATA[<]]> #{datemax}
+        </if>
+
+        <if test="start !=null">
+            limit #{start} , #{length}
         </if>
     </select>
 
@@ -89,7 +93,7 @@
 	</delete>
 
     <update id="updateBike" parameterType="com.app.entity.Bike">
-        UPDATE bike set
+        UPDATE bike
         <set>
 
             <if test="name !=null and name!=''">
@@ -109,4 +113,10 @@
         where id=#{id}
     </update>
 
+    <delete id="batchDelete" parameterType="int">
+        delete FROM bike where id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

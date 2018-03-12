@@ -20,4 +20,6 @@ public interface BikeMapper {
     int deleteBike(Bike param);
 
     int updateBike(Bike param);
+
+    int batchDelete(List<Integer> param);
 }
