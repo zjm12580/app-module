@@ -5,6 +5,9 @@ import com.app.entity.PageParameter;
 import com.app.entity.User;
 import com.app.iService.IUserService;
 import com.app.mapper.UserMapper;
+import com.app.utils.SexEnum;
+import com.app.utils.StringUtils;
+import com.app.utils.StringUtilsNew;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,17 +53,38 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public int updateUser(User user) {
-        return 0;
+        return userDaoImpl.updateUser(user);
     }
 
     @Override
     public int deleteUser(User user) {
-        return 0;
+        return userDaoImpl.deleteUser(user);
     }
 
     @Override
     public int insertUser(User user) {
-        return 0;
+        return userDaoImpl.insertUser(user);
+    }
+
+    @Override
+    public List<User> getUsers(User userparam) {
+        List<User> userList = userDaoImpl.getUsers(userparam);
+        for (User user : userList) {
+            user.setSexName(SexEnum.get(user.getSex()));
+            user.setPhone(StringUtilsNew.telephoneDesensitization(user.getPhone()));
+            user.setRealName(StringUtilsNew.nameDesensitization2(user.getRealName()));
+        }
+        return userList;
+    }
+
+    @Override
+    public Integer countUser(User userparam) {
+        return userDaoImpl.countUser(userparam);
+    }
+
+    @Override
+    public int batchDelete(List<Integer> idList) {
+        return userDaoImpl.batchDelete(idList);
     }
 
 }

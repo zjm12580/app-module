@@ -50,7 +50,7 @@
             and ctime >#{datemin}
         </if>
         <if test="datemax !=null">
-            and   datemax  <![CDATA[<]]> #{datemax}
+            and   ctime  <![CDATA[<]]> #{datemax}
         </if>
 
         <if test="start !=null">
@@ -98,6 +98,10 @@
 
             <if test="name !=null and name!=''">
                 name=#{name},
+            </if>
+
+            <if test="remark !=null and remark!=''">
+                remark=#{remark},
             </if>
             <if test="price !=null">
                 price =#{price},

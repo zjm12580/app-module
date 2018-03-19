@@ -74,8 +74,8 @@
 			<dd>
 				<ul>
 					<li><a data-href="<%=path %>/user/employeeIndex" data-title="员工管理" href="javascript:void(0)">员工管理</a></li>
-					<li><a data-href="role/roleIndex" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
-					<li><a data-href="user/accountManagerIndex" data-title="账号管理" href="javascript:void(0)">账号管理</a></li>
+					<li><a data-href="<%=path %>/role/roleIndex" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+					<li><a data-href="<%=path %>/user/adminRoleIndex" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
 
 				</ul>
 		</dd>
@@ -157,7 +157,7 @@
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
 				<li class="active">
-					<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+					<span title="我的桌面" data-href="<%=path %>/app/welcomeIndex">我的桌面</span>
 					<em></em></li>
 		</ul>
 	</div>
@@ -166,7 +166,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="<%=basePath %>/welcome.html"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="<%=path %>/app/welcomeIndex"></iframe>
 	</div>
 </div>
 </section>

@@ -1,120 +1,256 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.mapper.UserMapper">
-	<resultMap id="baseResultMap" type="com.app.entity.User">
-		<result property="id" column="id" jdbcType="BIGINT"/>
-		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
-		<result property="password" column="password" jdbcType="VARCHAR"/>
-		<result property="sex" column="sex" jdbcType="TINYINT"/>
-		<result property="phone" column="phone" jdbcType="VARCHAR"/>
-		<result property="departent" column="departent" jdbcType="VARCHAR"/>
-		<result property="ruleId" column="rule_id" jdbcType="BIGINT"/>
-		<result property="realName" column="real_name" jdbcType="VARCHAR"/>
-		<result property="ctime" column="ctime" jdbcType="TIMESTAMP"/>
-		<result property="mtime" column="mtime" jdbcType="TIMESTAMP"/>
-	</resultMap>
-<sql id="baseSql">
-	user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime
+    <resultMap id="baseResultMap" type="com.app.entity.User">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="TINYINT"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="departent" column="departent" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="ruleId" column="rule_id" jdbcType="BIGINT"/>
+        <result property="status" column="status" jdbcType="BIGINT"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="departmentId" column="departmentId" jdbcType="BIGINT"/>
+        <result property="ctime" column="ctime" jdbcType="TIMESTAMP"/>
+        <result property="mtime" column="mtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="baseSql">
+	id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,departmentId
 </sql>
 
-<insert id="insert" parameterType="com.app.entity.User">
+    <insert id="insert" parameterType="com.app.entity.User">
 	INSERT INTO app_user
-	   (id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime)
+	   (id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,remark,departmentId)
 	values (
-		#{id},#{userName},#{password},#{sex},#{phone},#{departent},#{ruleId},#{realName},#{ctime},#{mtime})
+		#{id},#{userName},#{password},#{sex},#{phone},#{departent},#{ruleId},#{realName},#{ctime},#{mtime},,#{status},,#{email},#{remark},#{departmentId})
 </insert>
 
-<select id="select" parameterType="com.app.entity.User" resultMap="baseResultMap">
+    <select id="select" parameterType="com.app.entity.User" resultMap="baseResultMap">
 	SELECT
-		id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime
+		id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,remark,departmentId
 	FROM
 		app_user
 </select>
-	
-	<select id="getUser" parameterType="com.app.entity.PageParameter" resultMap="baseResultMap">
-		SELECT <include refid="baseSql"/>
-		FROM app_user
-	</select>
-	
-	<update id="updateUser">
-	  UPDATE app_user SET
-		<trim prefix="" suffix="" suffixOverrides="," >
 
-			<if test="userName != null and userName!=''" >
-				user_name=#{userName},
-			</if>
-			<if test="sex != null and sex!=''" >
-				sex=#{sex},
-			</if>
-			<if test="phone != null and phone!=''" >
-				phone=#{phone},
-			</if>
-			<if test="departent != null and departent!=''" >
-				departent=#{departent},
-			</if>
-			<if test="ruleId != null and ruleId!=''" >
-				rule_id=#{ruleId},
-			</if>
+    <select id="getUser" parameterType="com.app.entity.PageParameter" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseSql"/>
+        FROM app_user
+    </select>
 
-			<if test="realName != null and realName!=''" >
-				real_name=#{realName},
-			</if>
-			<if test="ctime != null and ctime!=''" >
-				ctime=#{ctime},
-			</if>
-			<if test="mtime != null and mtime!=''" >
-				mtime=#{mtime},
-			</if>
-	</trim>
-	</update>
-	
-	<delete id="deleteUser" parameterType="com.app.entity.User">
-		DELETE
-		FROM
-			app_user
-		<trim prefix="where" suffix="" suffixOverrides="and" >
-			<if test="userName != null and userName!=''" >
-				and user_name=#{userName},
-			</if>
-			<if test="id != null and id!=''" >
-				and `id`=#{id},
-			</if>
-		</trim>
+    <update id="updateUser">
+        UPDATE app_user SET
+        <trim prefix="" suffix="" suffixOverrides=",">
 
-	</delete>
-	
-	<insert id="insertUser">
-		INSERT INTO 
-		<include refid="baseSql"/>
-		app_user
-		<trim prefix="values (" suffix=")" suffixOverrides="," >
-			<if test="userName != null and userName!=''" >
-				user_name=#{userName},
-			</if>
-			<if test="sex != null and sex!=''" >
-				sex=#{sex},
-			</if>
-			<if test="phone != null and phone!=''" >
-				phone=#{phone},
-			</if>
-			<if test="departent != null and departent!=''" >
-				departent=#{departent},
-			</if>
-			<if test="ruleId != null and ruleId!=''" >
-				rule_id=#{ruleId},
-			</if>
+            <if test="userName != null and userName!=''">
+                user_name=#{userName},
+            </if>
+            <if test="sex != null and sex!=''">
+                sex=#{sex},
+            </if>
+            <if test="phone != null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="departent != null and departent!=''">
+                departent=#{departent},
+            </if>
+            <if test="ruleId != null and ruleId!=''">
+                rule_id=#{ruleId},
+            </if>
 
-			<if test="realName != null and realName!=''" >
-				real_name=#{realName},
-			</if>
-			<if test="ctime != null and ctime!=''" >
-				ctime=#{ctime},
-			</if>
-			<if test="mtime != null and mtime!=''" >
-				mtime=#{mtime},
-			</if>
-		</trim>
+            <if test="realName != null and realName!=''">
+                real_name=#{realName},
+            </if>
+            <if test="ctime != null and ctime!=''">
+                ctime=#{ctime},
+            </if>
+            <if test="mtime != null and mtime!=''">
+                mtime=#{mtime},
+            </if>
+            <if test="status != null ">
+                status=#{status},
+            </if>
+            <if test="email != null and email!=''">
+                email=#{email},
+            </if>
+            <if test="remark != null and remark!=''">
+                remark=#{remark},
+            </if>
+            <if test="departmentId != null ">
+                departmentId=#{departmentId},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
 
-	</insert>
+    <delete id="deleteUser" parameterType="com.app.entity.User">
+        DELETE
+        FROM
+        app_user
+        <trim prefix="where" suffix="" suffixOverrides="and">
+            <if test="userName != null and userName!=''">
+                and user_name=#{userName},
+            </if>
+            <if test="id != null and id!=''">
+                and `id`=#{id},
+            </if>
+        </trim>
 
+    </delete>
+
+    <insert id="insertUser">
+        INSERT INTO
+        <include refid="baseSql"/>
+        app_user
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null and userName!=''">
+                user_name=#{userName},
+            </if>
+            <if test="sex != null and sex!=''">
+                sex=#{sex},
+            </if>
+            <if test="phone != null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="departent != null and departent!=''">
+                departent=#{departent},
+            </if>
+            <if test="ruleId != null and ruleId!=''">
+                rule_id=#{ruleId},
+            </if>
+            <if test="departmentId != null">
+                departmentId=#{departmentId},
+            </if>
+
+            <if test="realName != null and realName!=''">
+                real_name=#{realName},
+            </if>
+            <if test="ctime != null and ctime!=''">
+                ctime=#{ctime},
+            </if>
+            <if test="mtime != null and mtime!=''">
+                mtime=#{mtime},
+            </if>
+            <if test="status != null ">
+                status=#{status},
+            </if>
+            <if test="email != null and email!=''">
+                email=#{email},
+            </if>
+            <if test="remark != null and remark!=''">
+                remark=#{remark},
+            </if>
+        </trim>
+
+    </insert>
+
+    <select id="getUsers" parameterType="com.app.entity.User" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseSql"/>
+        FROM app_user
+        where isdel =0
+        <if test="userName !=null and userName!=''">
+            and user_name like CONCAT(CONCAT('%', #{userName}), '%')
+        </if>
+        <if test="password !=null and password!=''">
+            and password =#{password}
+        </if>
+        <if test="sex !=null">
+            and sex =#{sex}
+        </if>
+        <if test="phone !=null and phone!=''">
+            and phone =#{phone}
+        </if>
+        <if test="departent !=null and departent!=''">
+            and departent =#{departent}
+        </if>
+        <if test="ruleId !=null">
+            and rule_id =#{ruleId}
+        </if>
+
+        <if test="realName !=null and realName!=''">
+            and real_name =#{realName}
+        </if>
+        <if test="datemin !=null">
+            and ctime >#{datemin}
+        </if>
+        <if test="datemax !=null">
+            and ctime  <![CDATA[<]]> #{datemax}
+        </if>
+        <if test="status != null ">
+            and status=#{status}
+        </if>
+        <if test="email != null and email!=''">
+            and email=#{email}
+        </if>
+        <if test="remark != null and remark!=''">
+            and remark=#{remark}
+        </if>
+        <if test="departmentId != null">
+            and  departmentId=#{departmentId}
+        </if>
+
+        <if test="start !=null">
+            limit #{start} , #{length}
+        </if>
+    </select>
+
+
+    <select id="countUser" parameterType="com.app.entity.User" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM app_user
+        where isdel =0
+        <if test="userName !=null and userName!=''">
+            and user_name like CONCAT(CONCAT('%', #{userName}), '%')
+        </if>
+        <if test="password !=null and password!=''">
+            and password =#{password}
+        </if>
+        <if test="sex !=null">
+            and sex =#{sex}
+        </if>
+        <if test="phone !=null and phone!=''">
+            and phone =#{phone}
+        </if>
+        <if test="departent !=null and departent!=''">
+            and departent =#{departent}
+        </if>
+        <if test="ruleId !=null">
+            and rule_id =#{ruleId}
+        </if>
+
+        <if test="realName !=null and realName!=''">
+            and real_name =#{realName}
+        </if>
+        <if test="datemin !=null">
+            and ctime >#{datemin}
+        </if>
+        <if test="status != null ">
+            and status=#{status}
+        </if>
+        <if test="email != null and email!=''">
+            and email=#{email}
+        </if>
+        <if test="remark != null and remark!=''">
+            and remark=#{remark}
+        </if>
+        <if test="datemax !=null">
+            and ctime  <![CDATA[<]]> #{datemax}
+        </if>
+        <if test="departmentId != null">
+            AND  departmentId=#{departmentId}
+        </if>
+    </select>
+    
+    
+    <select id="batchDelete" parameterType="int">
+        delete FROM app_user where id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

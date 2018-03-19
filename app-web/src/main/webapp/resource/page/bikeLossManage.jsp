@@ -1,10 +1,10 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2017/12/13
-  Time: 1:21
-  To change this template use File | Settings | File Templates.
---%>
+        Created by IntelliJ IDEA.
+        User: Administrator
+        Date: 2017/12/13
+        Time: 1:21
+        To change this template use File | Settings | File Templates.
+        --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -51,119 +51,119 @@
 <script type="text/javascript">
 
     var table;
-var column=[
-    {"data": "id"},
-    {"data": "name"},
-    {"data": "type"},
-    {"data": "pictureUrl"},
-    {"data": "remark"},
-    {"data": "price"},
-    {"data": "rent"},
-    {"data": "ctime" },
-    {"data": "mtime" }
-];
+    var column=[
+        {"data": "id"},
+        {"data": "name"},
+        {"data": "type"},
+        {"data": "pictureUrl"},
+        {"data": "remark"},
+        {"data": "price"},
+        {"data": "rent"},
+        {"data": "ctime" },
+        {"data": "mtime" }
+    ];
     $(function(){
 
 
-       table= $('.table-sort').dataTable({
-            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
-            "bStateSave": true,//状态保存
+        table= $('.table-sort').dataTable({
+                "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+                "bStateSave": true,//状态保存
             <%--"sAjaxSource": '<%=path %>/app/getBikes',--%>
 //            "columns": column,
-            "serverSide": true,
+        "serverSide": true,
             "ordering": false, // 禁止排序
             "ajax": {
-                "url": "<%=path %>/app/getBikes",
+            "url": "<%=path %>/app/getBikes",
                 "type": "post",
                 "data": function (data) {
-                    data.name = $("#bikeName").val();
-                    data.datemax = $("#datemax").val();
-                    data.datemin = $("#datemin").val();
+                data.name = $("#bikeName").val();
+                data.datemax = $("#datemax").val();
+                data.datemin = $("#datemin").val();
 
+            }
+        },
+        "columnDefs": [
+            {
+                "targets": [0],
+                "data": "id",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return "<input type=\"checkbox\" value='"+data+"' name=\"\" value=\"\">";
                 }
             },
-            "columnDefs": [
-                {
-                    "targets": [0],
-                    "data": "id",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<input type=\"checkbox\" value='"+data+"' name=\"\" value=\"\">";
-                    }
-                },
-                {
-                    "targets": [1],
-                    "data": "id",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
-                    }
-                },
-                {
-                    "targets": [2],
-                    "data": "name",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
-                    }
-                },
-                {
-                    "targets": [3],
-                    "data": "type",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
-                    }
-                },
-                {
-                    "targets": [4],
-                    "data": "pictureUrl",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<img width='100' class='picture-thumb' src='"+"<%=path %>/app/downloadPhoto?fileId="+data+"'>";
-                    }
-                },
-                {
-                    "targets": [5],
-                    "data": "remark",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
-                    }
-                },
-                {
-                    "targets": [6],
-                    "data": "price",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
-                    }
-                },
-                {
-                    "targets": [7],
-                    "data": "rent",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return data;
-                    }
-                },
-                {
-                    "targets": [8],
-                    "data": "ctime",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return formatDateTime(data);
-                    }
-                },
-                {
-                    "targets": [9],
-                    "data": "mtime",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return formatDateTime(data);
-                    }
-                },
-                {
-                    "targets": [10],
-                    "data": "id",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<a style='text-decoration:none' onclick=\"member_modify('编辑单车','updateBikeIndex','','510','500',"+data+")\" href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6df;</i></a>" +
-                            "<a style='text-decoration:none' class='ml-5' onclick=\"delBike('"+data+"')\"  href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6e2;</i></a>";
-                    }
+            {
+                "targets": [1],
+                "data": "id",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return data;
                 }
+            },
+            {
+                "targets": [2],
+                "data": "name",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return data;
+                }
+            },
+            {
+                "targets": [3],
+                "data": "type",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return data;
+                }
+            },
+            {
+                "targets": [4],
+                "data": "pictureUrl",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return "<img width='100' class='picture-thumb' src='"+"<%=path %>/app/downloadPhoto?fileId="+data+"'>";
+                }
+            },
+            {
+                "targets": [5],
+                "data": "remark",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return data;
+                }
+            },
+            {
+                "targets": [6],
+                "data": "price",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return data;
+                }
+            },
+            {
+                "targets": [7],
+                "data": "rent",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return data;
+                }
+            },
+            {
+                "targets": [8],
+                "data": "ctime",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return formatDateTime(data);
+                }
+            },
+            {
+                "targets": [9],
+                "data": "mtime",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return formatDateTime(data);
+                }
+            },
+            {
+                "targets": [10],
+                "data": "id",
+                "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                    return "<a style='text-decoration:none' onclick=\"member_modify('编辑单车','updateBikeIndex','','510','500',"+data+")\" href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6df;</i></a>" +
+                        "<a style='text-decoration:none' class='ml-5' onclick=\"delBike('"+data+"')\"  href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6e2;</i></a>";
+                }
+            }
 //                <a style="text-decoration:none" onclick="product_brand_edit('品牌编辑','codeing.html','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
         ]
-        });
+    });
 
     });
 

@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * com.app.mapper
  *
- * @param ${param}
  * @author zhujiamin
  * @date 2017/7/26
  */
@@ -52,4 +51,10 @@ public interface UserMapper {
      * @return
      */
     int insertUser(User user);
+
+    Integer countUser(User userparam);
+
+    List<User> getUsers(User userparam);
+
+    int batchDelete(List<Integer> idList);
 }

@@ -39,4 +39,19 @@ public class UserDaoImpl implements IUserDao {
     public int insertUser(User user) {
         return userMapper.insertUser(user);
     }
+
+    @Override
+    public List<User> getUsers(User userparam) {
+        return userMapper.getUsers(userparam);
+    }
+
+    @Override
+    public Integer countUser(User userparam) {
+        return userMapper.countUser(userparam);
+    }
+
+    @Override
+    public int batchDelete(List<Integer> idList) {
+        return userMapper.batchDelete(idList);
+    }
 }

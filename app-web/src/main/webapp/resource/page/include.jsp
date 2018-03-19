@@ -7,13 +7,13 @@
 --%>
 <%
     String host = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-    String path =  request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+    String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + "resource";
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="s" uri="/struts-tags" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
@@ -38,6 +38,9 @@
     <script type="text/javascript" src="<%=basePath %>/lib/layer/2.4/layer.js"></script>
     <script type="text/javascript" src="<%=basePath %>/static/h-ui/js/H-ui.min.js"></script>
     <script type="text/javascript" src="<%=basePath %>/static/h-ui.admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/lib/hcharts/Highcharts/5.0.6/js/highcharts.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/lib/hcharts/Highcharts/5.0.6/js/modules/exporting.js"></script>
+
     <%--<script type="text/javascript" src="<%=basePath %>/static/h-ui/src/js/jQuery.cookie.js"></script>--%>
     <%--D:\zhujiamin\app-module\app-web\src\main\webapp\resource\static\h-ui\src\js\jQuery.cookie.js--%>
     <!--/_footer 作为公共模版分离出去-->
@@ -45,12 +48,12 @@
     <!--请在下方写此页面业务相关的脚本-->
     <script type="text/javascript" src="<%=basePath %>/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
     <script type="text/javascript" src="<%=basePath %>/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
-    <script type= text/javascript" src="<%=basePath %>/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type=text/javascript" src="<%=basePath %>/lib/jquery.validation/1.14.0/validate-methods.js"></script>
     <script type="text/javascript" src="<%=basePath %>/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
     <%--<script type="text/javascript"--%>
     <%--src="<%=path %>/lib/html5shiv.js"></script>--%>
-        <script type="text/javascript" src="<%=basePath %>/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="<%=basePath %>/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+    <script type="text/javascript" src="<%=basePath %>/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="<%=basePath %>/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 </head>
 <body>
 

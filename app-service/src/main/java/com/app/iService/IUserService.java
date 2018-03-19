@@ -33,4 +33,9 @@ public interface IUserService {
     int insertUser(User user);
 
 
+    List<User> getUsers(User userparam);
+
+    Integer countUser(User userparam);
+
+    int batchDelete(List<Integer> idList);
 }

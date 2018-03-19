@@ -34,10 +34,16 @@ public class BikeController extends BaseController {
     @Resource
     private BikeService bikeService;
 
+    @RequestMapping("/app/bikeLossManage")
+    public String bikeLossManage() {
+        return "/bikeLossManage";
+    }
+
     @RequestMapping("/app/bikeManage")
     public String bikeManage() {
         return "/bikeManage";
     }
+
 
     @RequestMapping("/app/updateBikeIndex")
     public String updateBikeIndex(Long id, Model model) {

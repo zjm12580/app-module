@@ -23,11 +23,11 @@
 <div class="header"></div>
 <div class="loginWraper">
     <div id="loginform" class="loginBox">
-        <form id="userForm" class="form form-horizontal" action="http://localhost:8080/app/toLogin" method="post">
+        <form id="userForm" class="form form-horizontal"  method="post">
         <div class="row cl">
             <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
             <div class="formControls col-xs-8">
-                <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L">
+                <input id="username" name="userName" type="text" placeholder="用户名" class="input-text size-L">
             </div>
         </div>
         <div class="row cl">
@@ -71,21 +71,21 @@
         var password = $("#password").val();
         console.info(userName+"---"+password);
         var param={
-            username:userName,
+            userName:userName,
             password:password
         }
         $.ajax({
             url: "<%=host %>/app/toLogin",
             dataType:"json",
-//            contentType: "application/json; charset=utf-8",
+            contentType: "application/json; charset=utf-8",
             type: 'POST', //GET,
-            data:{"param":JSON.stringify(param)},
+            data:JSON.stringify(param),
             success: function (data) {
                 console.info(data.status)
-                if (data == null||data.status=="failed") {
+                if (data == null||data.status==false) {
                     layer.msg('系统异常', {icon: 5});
                 }
-                if (data.status == "success") {
+                if (data.status) {
                     window.location = "<%=host %>/app/index";
                 }
             },
