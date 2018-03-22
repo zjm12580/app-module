@@ -22,7 +22,7 @@
         <input type="text" class="input-text" style="width:250px" placeholder="输入用户名称" id="userName" name="userName">
         <input type="text" class="input-text" style="width:250px" placeholder="真实姓名" id="realName" name="realName">
         <span class="select-box" style="width: 10%">
-				<select name="sex" class="select" >
+				<select id="sex" name="sex" class="select" >
                     <<option value="" selected>请选择性别</option>
 					<option value="0">男性</option>
 					<option value="1">女性</option>
@@ -33,7 +33,7 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
         <a href="javascript:;" onclick="batchDelele()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
             批量删除</a>
-        <a href="javascript:;" onclick="member_add('添加单车','addBike','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 新增单车</a>
+        <a href="javascript:;" onclick="member_add('添加单车','addUserIndex','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 新增用户</a>
     </span> <%--<span class="r">共有数据：<strong>88</strong> 条</span>--%> </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -46,12 +46,13 @@
                 <th width="40">性别</th>
                 <th width="90">电话号码</th>
                 <th width="90">部门</th>
-                <th width="">权限</th>
+                <th width="40">权限</th>
                 <th width="70">真实姓名</th>
                 <th width="70">状态</th>
                 <th width="70">邮箱</th>
                 <th width="70">创建时间</th>
                 <th width="40">修改时间</th>
+                <th width="90">备注</th>
                 <th width="90">操作</th>
 
             </tr>
@@ -97,7 +98,7 @@
                     data.userName = $("#userName").val();
                     data.sex = $("#sex").val();
                     data.realName = $("#realName").val();
-
+                    data.sex=$("#sex").val();
 
                 }
             },
@@ -170,14 +171,14 @@
                     "data": "status",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
                         if (data == "0") {
-                            return "<span class=\"label label-success radius\">已启用</span>";
+                            return "<div id='divStatus'><span class=\"label label-success radius\">已启用</span></div>";
                         }
-                        return "<span class=\"label label-defaunt radius\">已停用</span>";
+                        return "<div id='divStatus'><span  class=\"label label-defaunt radius\">已停用</span></div>";
                     }
                 },
                 {
                     "targets": [10],
-                    "data": "realName",
+                    "data": "email",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
                         return data;
                     }
@@ -198,11 +199,18 @@
                 },
                 {
                     "targets": [13],
+                        "data": "remark",
+                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
+                        return data;
+                    }
+                },
+                {
+                    "targets": [14],
                     "data": "id",
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<a style=\"text-decoration:none\" onclick=\"member_stop(this,"+data+",'1')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\"></i></a>" +
+                        return "<a id='stopIcon' style=\"text-decoration:none\" onclick=\"member_stop(this,"+data+",'1')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\"></i></a>" +
                                 "<a title=\"编辑\" href=\"javascript:;\" onclick=\"member_edit('"+data+"')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\"></i></a>" +
-                                "<a style=\"text-decoration:none\" class=\"ml-5\" onclick=\"change_password('修改密码','change-password.html','10001','600','270',"+data+")\" href=\"javascript:;\" title=\"修改密码\"><i class=\"Hui-iconfont\"></i></a>" +
+                                "<a style=\"text-decoration:none\" class=\"ml-5\" onclick=\"change_password("+data+")\" href=\"javascript:;\" title=\"修改密码\"><i class=\"Hui-iconfont\"></i></a>" +
                                 "<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,"+data+")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\"></i></a>";
                     }
                 }
@@ -227,6 +235,27 @@
         layer_show(title, url, w, h);
     }
 
+    /*用户-删除*/
+    function member_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            $.ajax({
+                type: 'POST',
+                url: '<%=path %>/user/deleteUser?id=' + id,
+                success: function(data){
+                    if(data.status) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        reloadData();
+                    }else {
+                        layer.msg('删除失败!', {icon: 1, time: 1000});
+                    }
+                },
+                error: function (data) {
+                    layer.msg(data, {icon: 1, time: 1000});
+                },
+            });
+        });
+    }
+
     function member_modify(title, url, str, w, h, id) {
         layer.open({
             type: 2,
@@ -247,6 +276,9 @@
                 url: '<%=path %>/user/stopUser?id=' + id + "&status=" + status,
                 success: function (data) {
                     if (data.status) {
+//                        $('#stopIcon').attr('title','启用');
+//                        $('#stopIcon').html('<i class="Hui-iconfont">&#xe631;</i>');
+//                        $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
                         layer.msg(data.msg, {icon: 1, time: 1000});
                         reloadData();
                     } else {
@@ -268,8 +300,10 @@
                 url: '<%=path %>/user/stopUser',
                 dataType: 'json',
                 success: function(data){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+//  $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+
+//                    $('#stopIcon').prepend('<i class="Hui-iconfont">&#xe631;</i>');
+//                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
                     $(obj).remove();
                     layer.msg('已启用!',{icon: 6,time:1000});
                 },
@@ -293,8 +327,16 @@
         });
     }
     /*密码-修改*/
-    function change_password(title,url,id,w,h){
-        layer_show(title,url,w,h);
+    function change_password(id){
+        layer.open({
+            type: 2,
+            area: ['600px','270px'],
+            fix: false, //不固定
+            maxmin: true,
+            shade: 0.4,
+            title: "修改密码",
+            content: "<%=path %>/user/changePasswordIndex" + "?id=" + id
+        });
     }
 
     /*用户-删除*/
@@ -352,7 +394,7 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
-                url: '<%=path %>/app/batchDelete',
+                url: '<%=path %>/user/batchDelete',
                 dataType: 'json',
                 data:ids,
                 success: function(data){

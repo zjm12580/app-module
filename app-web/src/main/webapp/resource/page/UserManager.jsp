@@ -120,11 +120,15 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
                 type: 'POST',
-                url: '',
+                url: '<%=path %>/app/deleteUser?id=' + id,
                 dataType: 'json',
                 success: function(data){
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
+                    if(data.status) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        reloadData();
+                    }else {
+                        layer.msg('删除失败!', {icon: 1, time: 1000});
+                    }
                 },
                 error:function(data) {
                     console.log(data.msg);

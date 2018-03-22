@@ -18,14 +18,14 @@
         <result property="mtime" column="mtime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="baseSql">
-	id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,departmentId
+	id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,departmentId,remark
 </sql>
 
     <insert id="insert" parameterType="com.app.entity.User">
 	INSERT INTO app_user
-	   (id,user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,remark,departmentId)
+	   (user_name,password,sex,phone,departent,rule_id,real_name,ctime,mtime,status,email,remark,departmentId)
 	values (
-		#{id},#{userName},#{password},#{sex},#{phone},#{departent},#{ruleId},#{realName},#{ctime},#{mtime},,#{status},,#{email},#{remark},#{departmentId})
+		#{userName},#{password},#{sex},#{phone},#{departent},#{ruleId},#{realName},#{ctime},#{mtime},#{status},#{email},#{remark},#{departmentId})
 </insert>
 
     <select id="select" parameterType="com.app.entity.User" resultMap="baseResultMap">
@@ -53,6 +53,9 @@
             </if>
             <if test="phone != null and phone!=''">
                 phone=#{phone},
+            </if>
+            <if test="password != null and password!=''">
+                password=#{password},
             </if>
             <if test="departent != null and departent!=''">
                 departent=#{departent},
@@ -92,18 +95,17 @@
         app_user
         <trim prefix="where" suffix="" suffixOverrides="and">
             <if test="userName != null and userName!=''">
-                and user_name=#{userName},
+                 user_name=#{userName}
             </if>
             <if test="id != null and id!=''">
-                and `id`=#{id},
+                 `id`=#{id}
             </if>
         </trim>
 
     </delete>
 
-    <insert id="insertUser">
+    <insert id="insertUser" parameterType="com.app.entity.User">
         INSERT INTO
-        <include refid="baseSql"/>
         app_user
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userName != null and userName!=''">
@@ -128,10 +130,10 @@
             <if test="realName != null and realName!=''">
                 real_name=#{realName},
             </if>
-            <if test="ctime != null and ctime!=''">
+            <if test="ctime != null ">
                 ctime=#{ctime},
             </if>
-            <if test="mtime != null and mtime!=''">
+            <if test="mtime != null">
                 mtime=#{mtime},
             </if>
             <if test="status != null ">
@@ -247,10 +249,10 @@
     </select>
     
     
-    <select id="batchDelete" parameterType="int">
+    <delete id="batchDelete" parameterType="int">
         delete FROM app_user where id in
         <foreach item="id" collection="list" open="(" separator="," close=")">
             #{id}
         </foreach>
-    </select>
+    </delete>
 </mapper>

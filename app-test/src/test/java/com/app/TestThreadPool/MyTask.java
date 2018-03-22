@@ -22,6 +22,6 @@ class MyTask implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("task "+taskNum+"执行完毕");
+        System.out.println("BikeLossTask "+taskNum+"执行完毕");
     }
 }

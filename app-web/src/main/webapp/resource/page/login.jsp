@@ -83,7 +83,7 @@
             success: function (data) {
                 console.info(data.status)
                 if (data == null||data.status==false) {
-                    layer.msg('系统异常', {icon: 5});
+                    layer.msg(data.msg, {icon: 5});
                 }
                 if (data.status) {
                     window.location = "<%=host %>/app/index";

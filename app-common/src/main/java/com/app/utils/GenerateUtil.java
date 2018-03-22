@@ -472,9 +472,9 @@ public class GenerateUtil {
         String url = "jdbc:mysql://localhost:3306/app";
         String user = "root";
         String pwd = "123456";
-        String table = "bike";
-        String packagePath = "app.common.entity.user";
-        String aliasName = "Bike";
+        String table = "visit";
+        String packagePath = "app.entity.visitor";
+        String aliasName = "visit";
         try {
             new GenerateUtil(driver,url,user,pwd,table,packagePath,aliasName);
         }

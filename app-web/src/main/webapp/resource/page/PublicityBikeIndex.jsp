@@ -22,9 +22,9 @@
         <button  onclick="reloadData()" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索单车</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
-        <a href="javascript:;" onclick="batchDelele()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-            批量删除</a>
-        <a href="javascript:;" onclick="member_add('添加单车','addBike','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 新增单车</a>
+        <%--<a href="javascript:;" onclick="batchDelele()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>--%>
+            <%--批量删除</a>--%>
+        <%--<a href="javascript:;" onclick="member_add('添加单车','addBike','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 新增单车</a>--%>
     </span> <%--<span class="r">共有数据：<strong>88</strong> 条</span>--%> </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -40,7 +40,6 @@
                 <th width="">租金</th>
                 <th width="70">创建时间</th>
                 <th width="70">修改时间</th>
-                <th width="40">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -51,21 +50,21 @@
 <script type="text/javascript">
 
     var table;
-var column=[
-    {"data": "id"},
-    {"data": "name"},
-    {"data": "type"},
-    {"data": "pictureUrl"},
-    {"data": "remark"},
-    {"data": "price"},
-    {"data": "rent"},
-    {"data": "ctime" },
-    {"data": "mtime" }
-];
+    var column=[
+        {"data": "id"},
+        {"data": "name"},
+        {"data": "type"},
+        {"data": "pictureUrl"},
+        {"data": "remark"},
+        {"data": "price"},
+        {"data": "rent"},
+        {"data": "ctime" },
+        {"data": "mtime" }
+    ];
 
     $(function(){
 
-       table= $('.table-sort').dataTable({
+        table= $('.table-sort').dataTable({
             "aaSorting": [[ 1, "desc" ]],//默认第几个排序
             "bStateSave": true,//状态保存
             <%--"sAjaxSource": '<%=path %>/app/getBikes',--%>
@@ -152,17 +151,9 @@ var column=[
                     "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
                         return formatDateTime(data);
                     }
-                },
-                {
-                    "targets": [10],
-                    "data": "id",
-                    "render": function (data, type, full) {//全部列值可以通过full.列名获取,一般单个列值用data PS:这里的render是有多少列就执行多少次方法。。。不知道为啥
-                        return "<a style='text-decoration:none' onclick=\"member_modify('编辑单车','updateBikeIndex','','510','500',"+data+")\" href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6df;</i></a>" +
-                            "<a style='text-decoration:none' class='ml-5' onclick=\"delBike('"+data+"')\"  href='javascript:;' title='编辑'><i class='Hui-iconfont'>&#xe6e2;</i></a>";
-                    }
                 }
 //                <a style="text-decoration:none" onclick="product_brand_edit('品牌编辑','codeing.html','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
-        ]
+            ]
         });
 
     });

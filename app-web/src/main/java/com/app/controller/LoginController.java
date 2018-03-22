@@ -2,6 +2,7 @@ package com.app.controller;
 
 import com.app.entity.PageParameter;
 import com.app.entity.User;
+import com.app.iService.IUserService;
 import com.app.utils.JsonUtils;
 import com.app.utils.ResultMap;
 import com.app.utils.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -19,6 +21,8 @@ import java.util.Map;
 @Controller
 public class LoginController extends BaseController {
 
+    @Resource
+    private IUserService userServiceImpl;
 
     /**
      * 执行登陆
@@ -68,9 +72,10 @@ public class LoginController extends BaseController {
             return ResultMap.failed("账号密码都不能为空");
         }
         //登陆逻辑
-
-
-        return ResultMap.success();
+        if (userServiceImpl.getUsers(user).size()>0){
+            return ResultMap.success();
+        }
+        return ResultMap.failed("登陆失败");
     }
 
 //    /**

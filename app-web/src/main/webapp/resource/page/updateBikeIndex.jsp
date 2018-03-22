@@ -89,7 +89,13 @@
             processData: false,
             contentType: false
         }).done(function (res) {
-            alert(res.msg);
+            layer.msg(res.msg, {icon: 1, time: 1000});
+            var index = parent.layer.getFrameIndex(window.name);
+//            parent.$('.btn-refresh').click();
+            setTimeout(function () {
+                parent.layer.close(index);
+            }, 1000);
+            window.parent.location.reload(); //刷新父页面
         });
     }
 

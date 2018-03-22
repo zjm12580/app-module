@@ -18,9 +18,6 @@ public class BIkeServiceImpl implements BikeService{
 
     @Resource
     private IBikeDao bikeDaoImpl;
-    @Resource
-    private IUserDao userDaoImpl;
-
     @Override
     public List<Bike> getBike(Bike param) {
         return bikeDaoImpl.getBike(param);

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
+    String ip=request.getRemoteAddr();
     String host = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + "resource";

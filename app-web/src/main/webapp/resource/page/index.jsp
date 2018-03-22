@@ -64,8 +64,8 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 单车管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="bikeManage" data-title="单车信息" href="javascript:void(0)">单车信息</a></li>
-					<li><a data-href="article-list.html" data-title="单车损耗" href="javascript:void(0)">单车损耗</a></li>
+					<li><a data-href="<%=path %>/app/bikeManage" data-title="单车信息" href="javascript:void(0)">单车信息</a></li>
+					<li><a data-href="<%=path %>/bikeLoss/bikeLossManage" data-title="单车损耗" href="javascript:void(0)">单车损耗</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -80,6 +80,21 @@
 				</ul>
 		</dd>
 	</dl>
+
+		<dl id="menu-picture">
+			<dt><i class="Hui-iconfont">&#xe613;</i>游客模块<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="<%=path %>/app/PublicityBikeIndex" data-title="单车查询" href="javascript:void(0)">单车查询</a>
+					</li>
+					<li><a data-href="<%=path %>/user/visitor" data-title="游客留言" href="javascript:void(0)">游客留言</a></li>
+					<%--/user/VisitorManager--%>
+					<li><a data-href="<%=path %>/user/VisitorManager" data-title="游客留言内容"
+						   href="javascript:void(0)">游客留言</a></li>
+
+				</ul>
+			</dd>
+		</dl>
 		<%--<dl id="menu-product">--%>
 			<%--<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>--%>
 			<%--<dd>--%>

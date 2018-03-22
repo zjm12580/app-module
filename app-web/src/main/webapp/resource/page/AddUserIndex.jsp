@@ -10,7 +10,6 @@
 <body>
 <article class="cl pd-20">
     <form action="<%=path %>/app/add" method="post" class="form form-horizontal" id="form-member-add">
-        <input type="hidden" class="input-text" value="${user.id}"  placeholder="" id="id" name="id">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
             <div class="formControls col-xs-8 col-sm-9">
@@ -18,6 +17,28 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="${user.userName}" placeholder="" id="password" name="password">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="sex" type="radio" id="sex-1" value="1" lchecked>
+                    <label for="sex-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sex-2" value="2" name="sex">
+                    <label for="sex-2">女</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sex-3" value="0" name="sex">
+                    <label for="sex-3">保密</label>
+                </div>
+            </div>
+        </div>        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机号：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <input type="text" class="input-text" value="${user.phone}" placeholder=""  id="price" name="phone">
@@ -27,6 +48,12 @@
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <input type="text" class="input-text" value="${user.email}" placeholder=""  id="email" name="email">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>真实姓名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="${user.realName}" placeholder=""  id="realName" name="realName">
             </div>
         </div>
         <%--<div class="row cl">--%>
@@ -41,7 +68,7 @@
             <label class="form-label col-xs-4 col-sm-3">部门：</label>
             <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
 				<select class="select" size="1" name="type">
-					<option value="" selected>请选择部门</option>
+					<option value="0" selected>请选择部门</option>
 					<option value="1">客服</option>
 					<option value="2">财务</option>
 					<option value="3">管理</option>
@@ -67,6 +94,13 @@
 <script>
 
     $(function() {
+
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
 //        alert("$!{bike.name}");
         <%--$.ajax({--%>
         <%--url: "<%=path %>/app/getBikes?id="+id,--%>
@@ -82,7 +116,7 @@
     function updateUser() {
         var formData = new FormData($("#form-member-add")[0]);
         $.ajax({
-            url: "<%=path %>/user/updateUser",
+            url: "<%=path %>/user/addUser",
             type: 'POST',
             cache: false,
             data: formData,
@@ -95,7 +129,6 @@
             setTimeout(function () {
                 parent.layer.close(index);
             }, 1000);
-            window.parent.location.reload(); //刷新父页面
         });
     }
 

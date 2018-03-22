@@ -57,4 +57,6 @@ public interface UserMapper {
     List<User> getUsers(User userparam);
 
     int batchDelete(List<Integer> idList);
+
+    int insert(User user);
 }

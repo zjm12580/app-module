@@ -9,13 +9,13 @@
     <!--<bean id="taskExecutor"-->
           <!--class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">-->
         <!--&lt;!&ndash; 核心线程数 &ndash;&gt;-->
-        <!--<property name="corePoolSize" value="${task.core.pool.size}"/>-->
+        <!--<property name="corePoolSize" valueBikeLossTasktask.core.pool.size}"/>-->
         <!--&lt;!&ndash; 最大线程数 &ndash;&gt;-->
-        <!--<property name="maxPoolSize" value="${task.max.pool.size}"/>-->
+        <!--<property name="maxPoolSize" valueBikeLossTasktask.max.pool.size}"/>-->
         <!--&lt;!&ndash; 队列最大长度 &ndash;&gt;-->
-        <!--<property name="queueCapacity" value="${task.queue.capacity}"/>-->
+        <!--<property name="queueCapacity" valueBikeLossTasktask.queue.capacity}"/>-->
         <!--&lt;!&ndash; 线程池维护线程所允许的空闲时间，默认为60s &ndash;&gt;-->
-        <!--<property name="keepAliveSeconds" value="${task.keep.alive.seconds}"/>-->
+        <!--<property name="keepAliveSeconds" valueBikeLossTasktask.keep.alive.seconds}"/>-->
         <!--<property name="rejectedExecutionHandler" ref="rejectedExecutionHandler"/>-->
     <!--</bean>-->
     <!--<bean id="rejectedExecutionHandler" class=""/>-->

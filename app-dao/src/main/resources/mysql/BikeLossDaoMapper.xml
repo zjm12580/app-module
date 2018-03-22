@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.BikeLossMapper">
+    <resultMap id="baseResultMap" type="com.app.entity.BikeLoss">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="BIGINT"/>
+        <result property="status" column="status" jdbcType="BIGINT"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="bikeNumber" column="bikeNumber" jdbcType="VARCHAR"/>
+        <result property="lossPosition" column="lossPosition" jdbcType="VARCHAR"/>
+        <result property="expectCost" column="expectCost" jdbcType="DECIMAL"/>
+        <result property="actualCost" column="actualCost" jdbcType="DECIMAL"/>
+        <result property="ctime" column="ctime" jdbcType="TIMESTAMP"/>
+        <result property="mtime" column="mtime" jdbcType="TIMESTAMP"/>
+        <result property="modifer" column="modifer" jdbcType="BIGINT"/>
+        <result property="isdel" column="isdel" jdbcType="TINYINT"/>
+        <result property="lossSituation" column="lossSituation" jdbcType="DECIMAL"/>
+        <result property="rent" column="rent" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="baseSql">
+        id,name,type,remark,bikeNumber,lossPosition,expectCost,actualCost,ctime,mtime,modifer,isdel,lossSituation,rent,status
+    </sql>
+
+    <insert id="insert" parameterType="com.app.entity.BikeLoss">
+        INSERT INTO bike_loss
+        (name,type,remark,bikeNumber,lossPosition,expectCost,actualCost,ctime,mtime,modifer,isdel,lossSituation,rent,status)
+        values (
+        #{name},#{type},#{remark},#{bikeNumber},#{lossPosition},#{expectCost},#{actualCost},#{ctime},#{mtime},#{modifer},0,#{lossSituation},#{rent},#{status})
+    </insert>
+
+    <select id="select" parameterType="com.app.entity.BikeLoss" resultMap="baseResultMap">
+        SELECT
+        id,name,type,remark,bikeNumber,lossPosition,expectCost,actualCost,ctime,mtime,modifer,isdel,lossSituation,rent,status
+        FROM
+        bike_loss
+    </select>
+
+
+    <select id="getList" parameterType="com.app.entity.BikeLoss" resultMap="baseResultMap">
+        SELECT
+        <include refid="baseSql"/>
+        FROM bike_loss
+        where isdel =0
+        <if test="name !=null and name!=''">
+            and name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="type !=null ">
+            and password =#{password}
+        </if>
+        <if test="remark !=null and remark!=''">
+            and remark =#{remark}
+        </if>
+        <if test="bikeNumber !=null and bikeNumber!=''">
+            and bikeNumber =#{bikeNumber}
+        </if>
+        <if test="lossPosition !=null and lossPosition!=''">
+            and lossPosition =#{lossPosition}
+        </if>
+        <if test="lossSituation !=null and lossSituation!=''">
+            and lossSituation =#{lossSituation}
+        </if>
+        <if test="status !=null">
+            and status =#{status}
+        </if>
+        <if test="expectCost !=null">
+            and expectCost =#{expectCost}
+        </if>
+        <if test="actualCost !=null">
+            and actualCost =#{actualCost}
+        </if>
+        <if test="datemin !=null">
+            and ctime >#{datemin}
+        </if>
+        <if test="modifer != null">
+            and modifer=#{modifer}
+        </if>
+        <if test="datemax !=null">
+            and ctime  <![CDATA[<]]> #{datemax}
+        </if>
+        <if test="rent != null">
+            AND  rent=#{rent}
+        </if>
+        order by ctime desc
+        <if test="start !=null">
+            limit #{start} , #{length}
+        </if>
+
+    </select>
+
+    <select id="count" parameterType="com.app.entity.BikeLoss" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM bike_loss
+        where isdel =0
+        <if test="name !=null and name!=''">
+            and name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="type !=null ">
+            and password =#{password}
+        </if>
+        <if test="remark !=null and remark!=''">
+            and remark =#{remark}
+        </if>
+        <if test="bikeNumber !=null and bikeNumber!=''">
+            and bikeNumber =#{bikeNumber}
+        </if>
+        <if test="lossPosition !=null and lossPosition!=''">
+            and lossPosition =#{lossPosition}
+        </if>
+        <if test="lossSituation !=null and lossSituation!=''">
+            and lossSituation =#{lossSituation}
+        </if>
+        <if test="expectCost !=null">
+            and expectCost =#{expectCost}
+        </if>
+        <if test="actualCost !=null">
+            and actualCost =#{actualCost}
+        </if>
+        <if test="datemin !=null">
+            and ctime >#{datemin}
+        </if>
+        <if test="status != null ">
+            and status=#{status}
+        </if>
+        <if test="modifer != null">
+            and modifer=#{modifer}
+        </if>
+        <if test="datemax !=null">
+            and ctime  <![CDATA[<]]> #{datemax}
+        </if>
+        <if test="rent != null">
+            AND  rent=#{rent}
+        </if>
+    </select>
+    <delete id="batchDelete" parameterType="int">
+        delete FROM bike_loss where id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+
+    <delete id="delete" parameterType="com.app.entity.BikeLoss">
+        DELETE
+        FROM
+        bike_loss
+        <trim prefix="where" suffix="" suffixOverrides="and">
+            <if test="id != null and id!=''">
+                `id`=#{id}
+            </if>
+        </trim>
+
+    </delete>
+
+
+    <update id="update" parameterType="com.app.entity.BikeLoss">
+        UPDATE bike_loss
+        <set>
+            <if test="name !=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="type !=null ">
+                type =#{type},
+            </if>
+            <if test="remark !=null and remark!=''">
+                 remark =#{remark},
+            </if>
+            <if test="bikeNumber !=null and bikeNumber!=''">
+                 bikeNumber =#{bikeNumber},
+            </if>
+            <if test="lossPosition !=null and lossPosition!=''">
+                 lossPosition =#{lossPosition},
+            </if>
+            <if test="lossSituation !=null and lossSituation!=''">
+                 lossSituation =#{lossSituation},
+            </if>
+            <if test="expectCost !=null">
+                 expectCost =#{expectCost},
+            </if>
+            <if test="actualCost !=null">
+                 actualCost =#{actualCost},
+            </if>
+            <if test="datemin !=null">
+                 ctime >#{datemin},
+            </if>
+            <if test="status != null ">
+                 status=#{status},
+            </if>
+            <if test="modifer != null">
+                 modifer=#{modifer},
+            </if>
+            <if test="ctime !=null">
+                 ctime = #{ctime},
+            </if>
+            <if test="rent != null">
+                  rent=#{rent},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+</mapper>

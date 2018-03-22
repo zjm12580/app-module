@@ -37,7 +37,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public int insertUser(User user) {
-        return userMapper.insertUser(user);
+        return userMapper.insert(user);
     }
 
     @Override

@@ -7,6 +7,7 @@ package com.app.controller;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.app.entity.Bike;
 import com.app.entity.PageDataTable;
+import com.app.iService.BikeLossService;
 import com.app.iService.BikeService;
 import com.app.utils.FileUtils;
 import com.app.utils.JsonUtils;
@@ -34,6 +35,7 @@ public class BikeController extends BaseController {
     @Resource
     private BikeService bikeService;
 
+
     @RequestMapping("/app/bikeLossManage")
     public String bikeLossManage() {
         return "/bikeLossManage";
@@ -42,6 +44,14 @@ public class BikeController extends BaseController {
     @RequestMapping("/app/bikeManage")
     public String bikeManage() {
         return "/bikeManage";
+    }
+
+
+//    PublicityBikeIndex
+
+    @RequestMapping("/app/PublicityBikeIndex")
+    public String PublicityBikeIndex() {
+        return "/PublicityBikeIndex";
     }
 
 
@@ -95,6 +105,7 @@ public class BikeController extends BaseController {
 
         return ResultMap.success("新增成功");
     }
+
 
     @RequestMapping("/app/delete")
     @ResponseBody
