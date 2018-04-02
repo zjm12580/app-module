@@ -11,7 +11,7 @@ public class FileUtils {
 
     private static final String PIC_FILE_NAME = "\\pic_file\\";
     public static String path="";
-    public static String pic_path="";
+    public static String pic_path="pic_file\\";
 
     static{
         path = System.getProperty("user.dir");
@@ -64,12 +64,13 @@ public class FileUtils {
             // 完毕，关闭所有链接
             try {
                 os.close();
+                os.flush();
                 inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return PIC_FILE_NAME + fileName;
+        return  fileName;
     }
 
     /**

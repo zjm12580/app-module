@@ -94,7 +94,7 @@ public class BikeController extends BaseController {
             if (file == null || file.getSize() == 0) {
                 throw new Exception("上传文件为空");
             }
-            param.setPictureUrl(file.getOriginalFilename());
+            param.setPictureUrl(FileUtils.savePic(file.getInputStream(),file.getOriginalFilename()));
             param.setIsdel(0);
             param.setCtime(new Date());
             param.setMtime(new Date());
