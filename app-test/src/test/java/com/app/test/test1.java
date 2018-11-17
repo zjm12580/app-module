@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * com.app.test
@@ -58,9 +60,22 @@ public class test1 {
 
     @Test
     public void test(){
-        List l;
-        l=new ArrayList<String>();
-        String s= (String) l.get(1);
+
+        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+        for (int i = 0; i < 10; i++) {
+            final int index = i;
+            try {
+                Thread.sleep(index * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            cachedThreadPool.execute(new Runnable() {
+                public void run() {
+                    System.out.println(index);
+                }
+            });
+
+    }
     }
 
     @Test

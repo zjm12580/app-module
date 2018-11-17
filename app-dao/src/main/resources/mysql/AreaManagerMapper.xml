@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.AreaManageMapper">
+	<resultMap id="baseResultMap" type="com.app.entity.AreaManager">
+		<result property="id" column="id" jdbcType="BIGINT"/>
+		<result property="areaId" column="areaId" jdbcType="BIGINT"/>
+		<result property="areaName" column="areaName" jdbcType="VARCHAR"/>
+		<result property="bikeAmount" column="bikeAmount" jdbcType="BIGINT"/>
+		<result property="studentAmount" column="studentAmount" jdbcType="BIGINT"/>
+		<result property="needBikeAmount" column="needBikeAmount" jdbcType="BIGINT"/>
+		<result property="manager" column="manager" jdbcType="BIGINT"/>
+		<result property="lossAmount" column="lossAmount" jdbcType="BIGINT"/>
+		<result property="needRecovered" column="needRecovered" jdbcType="BIGINT"/>
+		<result property="isdel" column="isdel" jdbcType="BIGINT"/>
+		<result property="ctime" column="ctime" jdbcType="TIMESTAMP"/>
+		<result property="creater" column="creater" jdbcType="BIGINT"/>
+	</resultMap>
+<sql id="baseSql">
+	id,areaId,areaName,bikeAmount,studentAmount,needBikeAmount,manager,lossAmount,needRecovered,isdel,ctime,creater
+</sql>
+
+<insert id="insert" parameterType="com.app.entity.AreaManager">
+	INSERT INTO area_manager
+	   (id,areaId,areaName,bikeAmount,studentAmount,needBikeAmount,manager,lossAmount,needRecovered,isdel,ctime,creater)
+	values (
+		#{id},#{areaId},#{areaName},#{bikeAmount},#{studentAmount},#{needBikeAmount},#{manager},#{lossAmount},#{needRecovered},#{isdel},#{ctime},#{creater})
+</insert>
+
+<select id="select" parameterType="com.app.entity.AreaManager" resultMap="baseResultMap">
+	SELECT
+		id,areaId,areaName,bikeAmount,studentAmount,needBikeAmount,manager,lossAmount,needRecovered,isdel,ctime,creater
+	FROM
+		area_manager
+</select>
+
+
+	<select id="getList" parameterType="com.app.entity.AreaManager" resultMap="baseResultMap">
+		SELECT
+		id,areaId,areaName,bikeAmount,studentAmount,needBikeAmount,manager,lossAmount,needRecovered,isdel,ctime,creater
+		FROM
+		area_manager
+		where isdel =0
+		<if test="areaName !=null and areaName!=''">
+			and areaName like CONCAT(CONCAT('%', #{areaName}), '%')
+		</if>
+		<if test="areaId !=null">
+			and areaId =#{areaId}
+		</if>
+		<!--<if test="rent !=null">-->
+			<!--and rent =#{rent}-->
+		<!--</if>-->
+		<!--<if test="id !=null">-->
+			<!--and id =#{id}-->
+		<!--</if>-->
+		<!--<if test="type !=null">-->
+			<!--and type =#{type}-->
+		<!--</if>-->
+		<!--<if test="datemin !=null">-->
+			<!--and ctime >#{datemin}-->
+		<!--</if>-->
+		<!--<if test="datemax !=null">-->
+			<!--and   ctime  <![CDATA[<]]> #{datemax}-->
+		<!--</if>-->
+
+		<if test="start !=null">
+			limit #{start} , #{length}
+		</if>
+	</select>
+
+	<select id="count" parameterType="com.app.entity.AreaManager" resultType="java.lang.Integer">
+		SELECT
+		count(1)
+		FROM
+		area_manager
+		where isdel =0
+		<if test="areaName !=null and areaName!=''">
+			and areaName like CONCAT(CONCAT('%', #{areaName}), '%')
+		</if>
+		<if test="areaId !=null">
+			and areaId =#{areaId}
+		</if>
+		<!--<if test="rent !=null">-->
+		<!--and rent =#{rent}-->
+		<!--</if>-->
+		<!--<if test="id !=null">-->
+		<!--and id =#{id}-->
+		<!--</if>-->
+		<!--<if test="type !=null">-->
+		<!--and type =#{type}-->
+		<!--</if>-->
+		<!--<if test="datemin !=null">-->
+		<!--and ctime >#{datemin}-->
+		<!--</if>-->
+		<!--<if test="datemax !=null">-->
+		<!--and   ctime  <![CDATA[<]]> #{datemax}-->
+		<!--</if>-->
+
+	</select>
+</mapper>

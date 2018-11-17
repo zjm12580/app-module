@@ -42,6 +42,8 @@ public class User {
     private String remark;
     private Integer departmentId;
 
+    private String nickName;
+
 
     public String getRemark() {
         return remark;
@@ -194,6 +196,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }
 

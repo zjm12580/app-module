@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class BIkeLossServiceImpl implements BikeLossService{
 
-
     @Resource
     private IBikeLossDao bikeLossDaoImpl;
 
